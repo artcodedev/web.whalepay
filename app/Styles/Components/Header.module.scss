@@ -1,0 +1,56 @@
+@import "../Root.scss";
+
+.Header {
+    clear: inherit;
+    text-align: center;
+
+    &__title {
+        display: flex;
+        flex-direction: column;
+
+        &__logo {
+            font-size: 64px;
+            font-weight: 5;
+            line-height: 30px;
+            color: $black;
+
+            span {
+                color: $accent;
+                font-weight: 4;
+            }
+        }
+
+        &__text {
+            font-size: 41.9px;
+            font-weight: 3;
+            color: $black;
+        }
+    }
+}
+
+@media (max-width: 450px) {
+    .Header {
+        clear: inherit;
+
+        &__title {
+            display: flex;
+            flex-direction: column;
+
+            &__logo {
+                font-size: 43px;
+                font-weight: 5;
+                line-height: 30px;
+
+                span {
+                    color: $accent;
+                    font-weight: 4;
+                }
+            }
+
+            &__text {
+                font-size: 28.2px;
+                font-weight: 3;
+            }
+        }
+    }
+}

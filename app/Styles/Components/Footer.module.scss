@@ -1,0 +1,88 @@
+@import "../Root.scss";
+
+.Footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+  margin-bottom: 50px;
+
+  &__secure {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    &__icon {
+      height: 25px;
+      width: 25px;
+      background-position: 50% 50%;
+      background-repeat: no-repeat;
+      background-size: contain;
+    }
+
+    &__text {
+      font-size: 16px;
+      font-weight: 4;
+    }
+  }
+
+  &__verification {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+
+    &_item {
+      height: 45px;
+      width: 120px;
+      background-position: 50% 50%;
+      background-repeat: no-repeat;
+      background-size: contain;
+    }
+  }
+
+  &__support__text {
+    font-weight: 4;
+
+    span {
+      color: $accent;
+      text-decoration: underline;
+    }
+  }
+
+  &__version__text {
+    font-weight: 4;
+    font-size: 14px;
+    text-align: left;
+    color: $gray;
+
+    span {
+      color: rgba($accent, 0.5);
+      text-decoration: none;
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  .Footer {
+    text-align: center;
+    &__verification {
+      display: block;
+      gap: 30px;
+
+      &_item {
+        height: 45px;
+        width: 120px;
+        margin-top: 30px;
+        background-position: 50% 50%;
+        background-repeat: no-repeat;
+        background-size: contain;
+      }
+    }
+
+    &__support-text {
+      text-align: center;
+    }
+  }
+}

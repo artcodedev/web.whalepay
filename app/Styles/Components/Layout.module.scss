@@ -1,0 +1,29 @@
+
+
+
+@import '../Root.scss';
+
+.Layout {
+    font-family: 'WUbuntu', sans-serif !important;
+    min-width: 310px;
+    overflow: auto;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #fff;
+
+    &__wrapp {
+        max-width: 95%;
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
+    
+}
