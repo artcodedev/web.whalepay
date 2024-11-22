@@ -1,0 +1,13 @@
+.UIButton {
+    padding: 10px;
+    border-radius: 10px;
+    border: 2px solid #042FB6;
+    font-size: 19px;
+    cursor: pointer;
+
+    &:hover {
+        background: #042eb641;
+        border: 2px solid #042eb641;
+    }
+
+}

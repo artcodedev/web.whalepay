@@ -1,0 +1,56 @@
+
+
+.HeaderAmount {
+    max-width: 450px;
+    border-radius: 26px;
+    background: #fff;
+    margin: 30px auto;
+    padding: 17px;
+    box-shadow: 0 0 10px #d7d7d7;
+
+    &__wrapp {
+        position: relative;
+
+        &__amount {
+
+            display: flex;
+            justify-content: space-between;
+            &__sum {
+                &__wrapp {
+                    &__sum {
+                        font-size: 23px;
+                        font-weight: 600;
+                    }
+                    &__sum > span {
+                        color: #042fb6;
+                    }
+
+                    &__title {
+                        font-size: 15px;
+                        color: #989898;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+@media (max-width: 500px) {
+    .HeaderAmount {
+        &__wrapp {
+    
+            &__amount {
+                &__sum {
+                    &__wrapp {
+
+                        &__title {
+                            font-size: 13px;
+                            color: #989898;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

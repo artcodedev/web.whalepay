@@ -3,6 +3,7 @@
 .Header {
     clear: inherit;
     text-align: center;
+    margin-top: 55px;
 
     &__title {
         display: flex;
@@ -21,7 +22,7 @@
         }
 
         &__text {
-            font-size: 41.9px;
+            font-size: 36.9px;
             font-weight: 3;
             color: $black;
         }

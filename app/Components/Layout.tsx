@@ -1,7 +1,8 @@
 
-
+/*
+*** STYLE
+*/
 import style from '@/app/Styles/Components/Layout.module.scss'
-
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
 

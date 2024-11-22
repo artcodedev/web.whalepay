@@ -1,4 +1,7 @@
 
+/*
+*** STYLE
+*/
 import style from '@/app/Styles/Components/Wrapper.module.scss';
 
 interface Props {

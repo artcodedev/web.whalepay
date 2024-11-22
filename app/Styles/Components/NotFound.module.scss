@@ -1,0 +1,32 @@
+.NotFount {
+    margin: 25px auto;
+
+    &__wrapp {
+
+        text-align: center;
+
+        &__title {
+
+            &__txtimg {
+                font-size: 50px;
+                font-weight: bold;
+                color: #00208b;
+            }
+
+            &__txt {
+                font-weight: 600;
+                font-size: 22px;
+            }
+        }
+
+        &__message {
+            margin-top: 10px;
+
+            &__txt {
+                font-size: 14px;
+                color: #989898;
+
+            }
+        }
+    }
+}

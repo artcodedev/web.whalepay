@@ -1,0 +1,19 @@
+.PaymentWrapper {
+    max-width: 450px;
+    border-radius: 26px;
+    background: #fff;
+    margin: 30px auto;
+    padding: 17px;
+    box-shadow: 0 0 10px #d7d7d7;
+
+    &__wrapp {
+        position: relative;
+    }
+
+}
+
+@media (max-width: 500px) {
+    .PaymentWrapper {
+        padding: 10px;
+    }
+}

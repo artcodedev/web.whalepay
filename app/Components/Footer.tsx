@@ -1,4 +1,11 @@
+/*
+*** COMPONENTS
+*/
 import style from "../Styles/Components/Footer.module.scss";
+
+/*
+*** IMAGE 
+*/
 import icon_shield from "../Static/svg/shield.svg";
 import icon_visa from "../Static/svg/visa.svg";
 import icon_mastercard from "../Static/svg/mastercard.svg";
@@ -20,7 +27,6 @@ const Footer = () => {
 
             <div className={style["Footer__verification"]}>
 
-
                 {[icon_visa, icon_mastercard, icon_pci_dss].map((i, id) => (
                     <div
                         className={style["Footer__verification_item"]}
@@ -28,7 +34,6 @@ const Footer = () => {
                         style={{ backgroundImage: `url(${i.src})` }}
                     />
                 ))}
-
 
             </div>
             <div className={style["Footer__support__text"]}>

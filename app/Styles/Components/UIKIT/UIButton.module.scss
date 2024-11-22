@@ -1,0 +1,19 @@
+.UIButton {
+    width: 100%;
+    color: #ffffff;
+    font-size: 18px;
+    padding: 13px;
+    line-height: 1.55;
+    font-weight: 500;
+    border-radius: 16px;
+    background-color: #042fb6;
+    background-position: center center;
+    border-color: transparent;
+    border-style: solid;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+
+    &:hover {
+        opacity: .85;
+        cursor: pointer;
+    }
+}

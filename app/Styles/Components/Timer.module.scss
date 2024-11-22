@@ -1,0 +1,32 @@
+.Timer {
+
+    &__wrapp {
+        &__timer {
+            font-size: 23px;
+            font-weight: 600;
+        }
+
+        &__title {
+            font-size: 15px;
+            color: #989898;
+        }
+    }
+
+}
+
+
+@media (max-width: 500px) {
+    .Timer {
+        &__wrapp {
+            &__timer {
+                font-size: 23px;
+                font-weight: 600;
+            }
+    
+            &__title {
+                font-size: 13px;
+                color: #989898;
+            }
+        }
+    }
+}

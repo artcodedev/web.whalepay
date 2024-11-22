@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-// import "./globals.css";
+import "../globals.css";
 
 
 export const metadata: Metadata = {
-  title: "Index whalepay",
+  title: "Payment whalepay",
   description: "Платежный сервис на каждый день",
 };
 

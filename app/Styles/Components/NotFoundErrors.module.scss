@@ -1,0 +1,30 @@
+.NotFount {
+    margin: 25px auto;
+
+    &__wrapp {
+
+        text-align: center;
+
+        &__title {
+
+            &__img {
+                height: 50px;
+            }
+
+            &__txt {
+                font-weight: 600;
+                font-size: 22px;
+            }
+        }
+
+        &__message {
+            margin-top: 10px;
+
+            &__txt {
+                font-size: 14px;
+                color: #989898;
+
+            }
+        }
+    }
+}

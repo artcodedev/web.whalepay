@@ -1,6 +1,8 @@
 
 
-
+/*
+*** STYLE
+*/
 import style from '@/app/Styles/Components/Header.module.scss'
 
 const Header = () => {
