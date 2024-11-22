@@ -9,11 +9,12 @@ import style from '@/app/Styles/Pages/Index.module.scss';
 /*
 *** COMPONENTS
 */
-import Header from './Components/Header';
-import Card from './Components/Card';
-import Wrraper from './Components/Wrapper';
-import Footer from './Components/Footer';
+import Header from '@/app/Components/Header';
+import Card from '@/app/Components/Card';
+import Wrraper from '@/app/Components/Wrapper';
+import Footer from '@/app//Components/Footer';
 import Layout from '@/app/Components/Layout';
+import Loading from './Components/Loading';
 
 /*
 *** IMAGE SVG
@@ -29,16 +30,18 @@ export default function Home() {
 
       <Header />
 
-      <Wrraper card={false} >
+      <Loading message='some text'/>
+
+      {/* <Wrraper card={false} >
 
         <div className={style['Index']}>
 
-          <div className={style['Index__card']}>
-            <Card number='0000000000000000' expiration='00/00' cardHolderName='john doe' />
-          </div>
-
           <div className={style['Index__title']}>
             <h1>Платежный сервис для любых целей</h1>
+          </div>
+
+          <div className={style['Index__card']}>
+            <Card number='0000000000000000' expiration='00/00' cardHolderName='john doe' />
           </div>
 
           <div className={style['Index__icons']}>
@@ -50,7 +53,7 @@ export default function Home() {
           </div>
         </div>
 
-      </Wrraper>
+      </Wrraper> */}
 
       <Footer />
 

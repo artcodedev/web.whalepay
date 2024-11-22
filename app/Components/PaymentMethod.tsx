@@ -36,6 +36,7 @@ const PaymentMethod = () => {
                         <div className={style['PaymentMethod__method__item__title']}>
                             <img src={e.src} className={style['PaymentMethod__method__item__img']} />
                         </div>
+                        
                         <div className={style['PaymentMethod__method__item__str']}>
                             <img src={shevronDown.src} />
                         </div>
@@ -43,6 +44,7 @@ const PaymentMethod = () => {
                     </div>)}
 
                 </div>
+
             </PaymantWrapper>
         </>
     );

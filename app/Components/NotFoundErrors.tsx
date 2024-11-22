@@ -8,7 +8,7 @@ import style from '@/app/Styles/Components/NotFoundErrors.module.scss';
 *** IMAGE(SVG)
 */
 import error from '@/app/Static/svg/error.svg';
-import notfoundicon from '@/app/Static/svg/404_icon.svg'; 
+import notfoundicon from '@/app/Static/svg/error.gif';
 
 const NotFoundErrors = ({notfound} : {notfound: boolean}) => {
 
@@ -20,11 +20,9 @@ const NotFoundErrors = ({notfound} : {notfound: boolean}) => {
                 <div className={style['NotFount__wrapp']}>
 
                     <div className={style['NotFount__wrapp__title']}>
-
-                        <div className={style['NotFount__wrapp__title__img']}>
-                             <img src={notfound ? error.src : notfoundicon.src} />
+                        <div className={style['NotFount__wrapp__title__img']} style={notfound ? {height: '100%'} : {}}>
+                             <img src={notfound ? notfoundicon.src : error.src} style={notfound ? {width: '20%'} : {} }/>
                         </div>
-
                     </div>
 
                     <div className={style['NotFount__wrapp__title']}>

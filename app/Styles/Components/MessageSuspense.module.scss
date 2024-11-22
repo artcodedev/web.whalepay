@@ -1,0 +1,14 @@
+
+
+.MessageSuspense {
+    background: #eee;
+    margin-top: 15px;
+    border-radius: 20px;
+    padding: 10px;
+
+    &__wrapp {
+        display: flex;
+        justify-content: center;
+    }
+
+}

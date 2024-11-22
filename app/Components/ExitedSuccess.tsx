@@ -30,7 +30,7 @@ const ExitedSuccess = ({ timeout }: { timeout: boolean }) => {
 
                     <div className={style['ExitedSuccess__wrapp__title']}>
                         <div className={style['ExitedSuccess__wrapp__title__txt']}>
-                            {timeout ? 'Оплата найдена' : 'Оплата не найдена'}
+                            {timeout ? 'Оплата найдена' : 'Время сессии вышло'}
                         </div>
                     </div>
 
@@ -39,7 +39,7 @@ const ExitedSuccess = ({ timeout }: { timeout: boolean }) => {
                             {timeout ? 
                             <>
                             <div>Счет на сумму {prise} рублей оплачен.</div><div>Спасибо за оплату.</div>
-                            </> : <div>Счет на сумму {prise} рублей не оплачен.</div>}
+                            </> : <div>Спасибо за использование <span>PAY</span>WHALE.</div>}
                         </div>
                     </div>
 

@@ -1,0 +1,26 @@
+.Loading {
+
+    &__wrapp {
+        margin: 60px auto;
+        position: relative;
+
+        &__text {
+            display: inline;
+
+            &__txt {
+                text-align: center;
+                font-size: 18px;
+            }
+        }
+
+        &__loading {
+            display: flex;
+            justify-content: center;
+        }
+
+        &__loading>img {
+            height: 100px;
+        }
+
+    }
+}
