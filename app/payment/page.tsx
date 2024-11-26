@@ -12,10 +12,8 @@ import HeaderAmount from '@/app/Components/HeaderAmount';
 import PaymentSuspens from '@/app/Components/PaymentSuspense';
 import Success from '@/app/Components/Success';
 import Exited from '../Components/Exited';
-import PaymantWrapper from "@/app/Components/PaymentWrapper";
-import Loading from '../Components/Loading';
+import ReceivingDetails from '@/app/Components/ReceivingDetails';
 import Errors from '@/app/Components/Errors';
-
 
 export default function Home() {
   return (
@@ -34,11 +32,8 @@ export default function Home() {
 
       <Success />
 
-      <PaymantWrapper>
-        <Loading message='Получение реквизитов'/>
-      </PaymantWrapper>
-
-
+      <ReceivingDetails />
+     
       <PaymentMethod />
 
       <Footer />
