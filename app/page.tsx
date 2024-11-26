@@ -30,9 +30,7 @@ export default function Home() {
 
       <Header />
 
-      <Loading message='some text'/>
-
-      {/* <Wrraper card={false} >
+      <Wrraper card={false} >
 
         <div className={style['Index']}>
 
@@ -51,9 +49,9 @@ export default function Home() {
 
             </div>
           </div>
-        </div>
+        </div>    
 
-      </Wrraper> */}
+      </Wrraper>
 
       <Footer />
 
