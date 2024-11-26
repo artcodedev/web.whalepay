@@ -13,7 +13,8 @@
             font-size: 64px;
             font-weight: 5;
             line-height: 30px;
-            color: $black;
+            color: #fff;
+            // color: $black;
 
             span {
                 color: $accent;
@@ -24,7 +25,8 @@
         &__text {
             font-size: 36.9px;
             font-weight: 3;
-            color: $black;
+            color: #fff;
+            // color: $black;
         }
     }
 }
