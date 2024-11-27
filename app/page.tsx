@@ -26,36 +26,44 @@ import alfabank from '@/app/Static/svg/logo/logo_alfa.svg';
 export default function Home() {
   return (
 
-    <Layout>
+    <>
+      <div className={style['Index__rotate_elem']}></div>
+      <div className={style['Index__background_fon']}></div>
 
-      <Header />
+      <Layout>
 
-      <Wrraper card={false} >
+        <Header color={true}/>
 
-        <div className={style['Index']}>
+        <Wrraper card={false} >
 
-          <div className={style['Index__title']}>
-            <h1>Платежный сервис для любых целей</h1>
-          </div>
+          <div className={style['Index']}>
 
-          <div className={style['Index__card']}>
-            <Card number='0000000000000000' expiration='00/00' cardHolderName='john doe' />
-          </div>
+            <div className={style['Index__title']}>
+              <h1>Платежный сервис для любых целей</h1>
+            </div>
 
-          <div className={style['Index__icons']}>
-            <div className={style['Index__icons__items']}>
+            <div className={style['Index__card']}>
+              <Card number='0000000000000000' expiration='00/00' cardHolderName='john doe' />
+            </div>
 
-              {[sberbank, tinkiff, alfabank].map((e) => <img className={style['Index__icons__items__img']} src={e.src} style={{ backgroundImage: `url(${e.src})` }}></img>)}
+            <div className={style['Index__icons']}>
+              <div className={style['Index__icons__items']}>
 
+                {[sberbank, tinkiff, alfabank].map((e) => <img className={style['Index__icons__items__img']} src={e.src} style={{ backgroundImage: `url(${e.src})` }}></img>)}
+
+              </div>
             </div>
           </div>
-        </div>    
 
-      </Wrraper>
+        </Wrraper>
 
-      <Footer />
+        <Footer black={false}/>
 
-    </Layout>
+      </Layout>
+
+</>
+
+
 
   );
 }

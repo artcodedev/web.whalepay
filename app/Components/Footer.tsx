@@ -11,7 +11,9 @@ import icon_visa from "../Static/svg/visa.svg";
 import icon_mastercard from "../Static/svg/mastercard.svg";
 import icon_pci_dss from '../Static/svg/pci-dss.svg';
 
-const Footer = () => {
+const Footer = ({black}: {black: boolean}) => {
+
+    console.log(black)
 
     return (
         <div className={style["Footer"]}>
@@ -20,7 +22,7 @@ const Footer = () => {
                     className={style["Footer__secure__icon"]}
                     style={{ backgroundImage: `url(${icon_shield.src})` }}
                 />
-                <div className={style["Footer__secure__text"]}>
+                <div className={style[black ? "Footer__secure__textblack" : "Footer__secure__text"]}>
                     Гарантия безопасной сделки
                 </div>
             </div>
@@ -36,7 +38,7 @@ const Footer = () => {
                 ))}
 
             </div>
-            <div className={style["Footer__support__text"]}>
+            <div className={style[black ? "Footer__support__textBlack" : "Footer__support__text"]}>
                 Нужна помощь? Напишите нам на <span>support@paywhale.ru</span>
             </div>
 

@@ -14,7 +14,19 @@
             font-weight: 5;
             line-height: 30px;
             color: #fff;
-            // color: $black;
+
+            span {
+                color: $accent;
+                font-weight: 4;
+            }
+        }
+
+
+        &__logo__black {
+            font-size: 64px;
+            font-weight: 5;
+            line-height: 30px;
+            color: #000;
 
             span {
                 color: $accent;
@@ -26,7 +38,12 @@
             font-size: 36.9px;
             font-weight: 3;
             color: #fff;
-            // color: $black;
+        }
+
+        &__text__black {
+            font-size: 36.9px;
+            font-weight: 3;
+            color: #000;
         }
     }
 }

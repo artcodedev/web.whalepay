@@ -20,7 +20,7 @@ export default function Home() {
 
     <Layout>
 
-      <Header />
+      <Header color={false}/>
 
       <HeaderAmount />
 
@@ -33,10 +33,10 @@ export default function Home() {
       <Success />
 
       <ReceivingDetails />
-     
+
       <PaymentMethod />
 
-      <Footer />
+      <Footer black={true} />
 
     </Layout>
 

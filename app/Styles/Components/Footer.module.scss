@@ -24,6 +24,13 @@
     &__text {
       font-size: 16px;
       font-weight: 4;
+      color: $white;
+    }
+
+    &__textblack {
+      font-size: 16px;
+      font-weight: 4;
+      color: $black;
     }
   }
 
@@ -44,11 +51,23 @@
 
   &__support__text {
     font-weight: 4;
+    color: $white;
 
-    span {
-      color: $accent;
-      text-decoration: underline;
-    }
+  }
+
+  &__support__textBlack {
+    font-weight: 4;
+    color: $black;
+
+  }
+
+  span {
+    color: #dfdfdf;
+    text-decoration: underline;
+    background: #7255ff;
+    padding: 5px;
+    border-radius: 5px;
+    line-height: 40px;
   }
 
   &__version__text {
@@ -58,8 +77,8 @@
     color: $gray;
 
     span {
-      color: rgba($accent, 0.5);
       text-decoration: none;
+      background: #7155ff99;
     }
   }
 }
@@ -67,6 +86,7 @@
 @media (max-width: 500px) {
   .Footer {
     text-align: center;
+
     &__verification {
       display: block;
       gap: 30px;

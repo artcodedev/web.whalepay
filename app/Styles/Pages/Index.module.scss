@@ -1,16 +1,39 @@
 @import '../Root.scss';
 
 body {
-    background-size: 140px, 100%, cover;
-    background-blend-mode: overlay;
-    // background: url('/app/Static/img//mask.png'), radial-gradient(circle farthest-corner at 0 0, #000 30%, #a899fb 65%, #732fc9 80%, #c1f1ff 110%) no-repeat, radial-gradient(closest-side at 60% 50%, #732fc9 20%, #000 100%) no-repeat;
-    background: radial-gradient(circle farthest-corner at 0 0, #000 30%, #a899fb 65%, #732fc9 80%, #c1f1ff 110%) no-repeat, radial-gradient(closest-side at 60% 50%, #732fc9 20%, #000 100%) no-repeat;
+    margin: 0;
+    padding: 0;
+    background: #000;
 }
+
 
 .Index {
     width: 97%;
     max-width: 600px;
     margin: auto;
+    position: relative;
+    z-index: 10;
+
+    &__rotate_elem {
+        background: linear-gradient(0deg, #228ac3 0%, #27007e 81%);
+        height: 100%;
+        aspect-ratio: 1;
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        translate: -50% -50%;
+        border-radius: 50%;
+        animation: rotate 20s infinite;
+        opacity: 0.8;
+    }
+
+    &__background_fon {
+        height: 100%;
+        width: 100%;
+        position: fixed;
+        z-index: 2;
+        backdrop-filter: blur(12vmax);
+    }
 
     &__title {
         margin: 30px 0px;
@@ -31,6 +54,22 @@ body {
             }
         }
 
+    }
+}
+
+
+
+@keyframes rotate {
+    0% {
+        rotate: 0deg;
+    }
+
+    50% {
+        scale: 1 1.5;
+    }
+
+    100% {
+        rotate: 360deg;
     }
 }
 
