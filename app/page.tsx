@@ -24,6 +24,7 @@ import tinkiff from '@/app/Static/svg/logo/logo_tinkoff.svg';
 import alfabank from '@/app/Static/svg/logo/logo_alfa.svg';
 
 export default function Home() {
+
   return (
 
     <>
@@ -32,7 +33,7 @@ export default function Home() {
 
       <Layout>
 
-        <Header color={true}/>
+        <Header color={true} />
 
         <Wrraper card={false} >
 
@@ -57,11 +58,11 @@ export default function Home() {
 
         </Wrraper>
 
-        <Footer black={false}/>
+        <Footer black={false} />
 
       </Layout>
 
-</>
+    </>
 
 
 
