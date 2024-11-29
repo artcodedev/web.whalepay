@@ -6,12 +6,14 @@
 import PaymantWrapper from "@/app/Components/PaymentWrapper";
 import Loading from '../Components/Loading';
 
-const ReceivingDetails = () => {
+const ReceivingDetails = ({ message }: { message?: string }) => {
 
     return (
         <>
             <PaymantWrapper>
-                <Loading message='Получение реквизитов' />
+                    
+                <Loading message={message} />
+
             </PaymantWrapper>
         </>
     );
