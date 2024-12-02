@@ -26,5 +26,10 @@ interface VarifySessionResponseData {
 
 export interface VarifySessionResponse {
     status: number
-    data?: VarifySessionResponseData
+    message?: string
+    data: VarifySessionResponseData
+}
+
+export interface VarifySessionRequest {
+    session_uid: string
 }

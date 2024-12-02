@@ -14,7 +14,7 @@ const Errors = () => {
 
                 <NotFoundErrors notfound={false} />
 
-                <UIButton title='Вернуться на сайт' />
+                <UIButton title='Вернуться на сайт' href="/"/>
 
             </PaymantWrapper>
 

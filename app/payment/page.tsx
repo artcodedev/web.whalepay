@@ -16,18 +16,19 @@ import PaymentSuspens from '@/app/Components/PaymentSuspense';
 import Success from '@/app/Components/Success';
 import Exited from '../Components/Exited';
 import ReceivingDetails from '@/app/Components/ReceivingDetails';
-import Loading from '../Components/Loading';
 import Errors from '@/app/Components/Errors';
 import { redirect } from 'next/navigation'
 
 /*
 *** Models
 */
-import { VarifySessionRequest } from '@/app/Models/Models';
+import { AnswersError } from '@/app/Models/Models';
 
-import React, { useState, useEffect} from 'react';
-import { Fetch } from '../Utils/Axio';
-
+import React, { useState, useEffect, MouseEventHandler } from 'react';
+import { Fetch } from '../Utils/Fetch';
+import useAsyncEffect from 'use-async-effect';
+import { VarifySessionResponse, VarifySessionRequest} from '../Models/Session';
+import { BanksResponse, BanksResponseData } from '../Models/Banks';
 
 export default function Payments() {
 
@@ -35,54 +36,78 @@ export default function Payments() {
   *** ALL STATE
   */
   const [loading, setLoading] = useState<boolean>(true);
+  const [loadingTitle, setLoadingTitle] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false);
+  const [success, setSuccess] = useState<boolean>(false);
+  const [exited, setExited] = useState<boolean>(false);
+  const [paymentMethod, setPaymentMethod] = useState<boolean>(false);
+  const [dataPaymentMethod, setDataPaymentMethod] = useState<BanksResponseData[]>([]);
 
+  /*
+  *** GET PARAMS QUERY
+  */
   const searchParams: ReadonlyURLSearchParams = useSearchParams();
-
   const session_uid: string | null = searchParams.get('session_uid');
-
 
   if (!session_uid) { redirect("/") }
 
-  useEffect(() => {
+  useAsyncEffect(async () => {
+
     if (session_uid) {
 
-      const data: VarifySessionRequest = {  
-        session_uid: session_uid
+      const request: VarifySessionResponse = await Fetch.request(`http://127.0.0.1:3000/api/v1/validsession`, { session_uid: session_uid });
+
+      if (request.status == 200) {
+
+        const status: string = request.data.session.status;
+
+        if (status === "PROCESS") {
+
+          // get banks fetch
+          const fetch: BanksResponse = await Fetch.request(`http://127.0.0.1:3000/api/v1/banks`);
+
+          if (fetch.status == 200) {
+            if (fetch.data.length) {
+              setDataPaymentMethod(fetch.data); setLoading(false); setPaymentMethod(true); 
+            } else {
+              setLoading(false); setError(true); 
+            }
+            
+          }
+        }
+
+        if (status === "PENDING") { }
+
+        if (status === "EXITED") { setLoading(false); setSuccess(true); }
+
+        if (status === "SUCCESS") { setLoading(false); }
+
+        if (status === "ERROR") { setLoading(false); setError(true); }
+
       }
+      else { setLoading(false); setError(true); }
 
-      // const response = await 
+    } else { setLoading(false); setError(true); }
 
-      const fetchRes = async () => {
-        const fetch = await Fetch.request("http://127.0.0.1:3000/api/v1/validsession", { session_uid: session_uid });
 
-        // console.log(fetch)
 
-        return await fetch.status ? fetch.result : fetch;
-      }
 
-      console.log(fetchRes());
+  }, []);
 
-      
 
-      // fetch('/api/v1/validsession',
-      //   {method: 'POST',
-      //     headers: { 'Content-Type': 'application/json'},
-      //     body: JSON.stringify(data)
-      //   }
-      // )
+  const PaymentMethodAction = (e: React.MouseEvent<HTMLElement>): void => {
 
-      // .then((res) => res.json())
+    const ta: EventTarget & HTMLElement = e.currentTarget;
 
-      // .then((data) => {
-      //   console.log(data)
-      // })
+    const uid: string | null = ta.attributes[1].textContent;
+
+    if (uid) {
+      setPaymentMethod(false);
+      setLoading(true);
+      setLoadingTitle(true);
     }
+  }
 
-
-  });
-
-
-  
   return (
 
     <Layout>
@@ -93,15 +118,15 @@ export default function Payments() {
 
       {/* <PaymentSuspens /> */}
 
-      {/* <Exited /> */}
+      {exited ? <Exited /> : <></>}
 
-      {/* <Errors /> */}
+      {error ? <Errors /> : <></>}
 
-      {/* <Success /> */}
+      {success ? <Success /> : <></>}
 
-      {loading ? <ReceivingDetails /> : '  '}
+      {loading ? <ReceivingDetails message={loadingTitle ? 'Минуту! Ожидаю реквизиты.': ''}/> : <></>}
 
-      {/* <PaymentMethod /> */}
+      {paymentMethod ? <PaymentMethod data={dataPaymentMethod} onclick={PaymentMethodAction}/> : <></>}
 
       <Footer black={true} />
 

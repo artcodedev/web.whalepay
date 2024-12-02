@@ -1,7 +1,8 @@
 
 
 
-export interface VarifySessionRequest {
-    session_uid: string
+export interface AnswersError {
+    status: number
+    message: string
 }
 

@@ -9,16 +9,28 @@ import style from '@/app/Styles/Components/PaymentMethod.module.scss';
 *** IMAGE(SVG)
 */
 import shevronDown from '@/app/Static/svg/chevron-down.svg';
-import alfa from '@/app/Static/svg/logo/logo_alfa.svg';
-import sber from '@/app/Static/svg/logo/logo_sberbank.svg';
-import tinkoff from '@/app/Static/svg/logo/logo_tinkoff.svg';
+// import alfa from '@/app/Static/svg/logo/logo_alfa.svg';
+// import sber from '@/app/Static/svg/logo/logo_sberbank.svg';
+// import tinkoff from '@/app/Static/svg/logo/logo_tinkoff.svg';
 
 /*
 *** COMPONENTS
 */
 import PaymantWrapper from './PaymentWrapper';
 
-const PaymentMethod = () => {
+interface PropData {
+    uid: string
+    title: string
+    img: string
+}
+
+interface Prop {
+
+    data: PropData[]
+    onclick: (e: React.MouseEvent<HTMLElement>) => void
+}
+
+const PaymentMethod = ({...pr}: Prop) => {
 
     return (
         <>
@@ -31,10 +43,10 @@ const PaymentMethod = () => {
 
                 <div className={style['PaymentMethod__method']}>
 
-                    {[alfa, tinkoff, sber, sber].map((e) => <div className={style['PaymentMethod__method__item']}>
+                    {pr.data.map((e) => <div className={style['PaymentMethod__method__item']} uid-data={e.uid} title={e.title} onClick={pr.onclick}>
 
                         <div className={style['PaymentMethod__method__item__title']}>
-                            <img src={e.src} className={style['PaymentMethod__method__item__img']} />
+                            <img src={e.img} className={style['PaymentMethod__method__item__img']} />
                         </div>
                         
                         <div className={style['PaymentMethod__method__item__str']}>
