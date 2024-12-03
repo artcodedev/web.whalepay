@@ -19,13 +19,15 @@ import ReceivingDetails from '@/app/Components/ReceivingDetails';
 import Errors from '@/app/Components/Errors';
 import Email from '@/app/Components/Email';
 
+import { Console } from '../Utils/Console';
+
 
 import { redirect } from 'next/navigation'
 
 /*
 *** Models
 */
-import { AnswersError } from '@/app/Models/Models';
+import { AnswersError, PaymentData  } from '@/app/Models/Models';
 
 import React, { useState, useEffect, MouseEventHandler, ChangeEvent, KeyboardEvent } from 'react';
 import { Fetch } from '../Utils/Fetch';
@@ -35,22 +37,12 @@ import { BanksResponse, BanksResponseData } from '../Models/Banks';
 import { useStore } from '../Store/Store';
 
 
-interface PaymentData {
-  time_opened: string,
-  timezone: number,
-  browser_version: string,
-  browser_language: string,
-  ip: string,
-  email: string,
-  bank_uid: string,
-  session_uid: string
-}
-
 export default function Payments() {
 
-
-
-  const { session_uid_store, email, bank_uid_store, setBank, setSession, setEmeil } = useStore();
+  /*
+  *** Store
+  */
+  const { setBank } = useStore();
 
   /*
   *** ALL STATE
@@ -70,12 +62,33 @@ export default function Payments() {
   *** GET PARAMS QUERY
   */
   const searchParams: ReadonlyURLSearchParams = useSearchParams();
+
   const session_uid: string | null = searchParams.get('session_uid');
 
   if (!session_uid) { redirect("/") }
 
-  console.log(email)
-  console.log(bank_uid_store);
+  const getCard = async () => {
+
+
+    try{
+      let wait: boolean = true;
+      while (wait) {
+        let request = await Fetch.request('http://127.0.0.1:3000/api/v1/getcard', {session_uid: session_uid});
+
+        console.log(request)
+
+        if (request.status == 200) {
+          
+        }
+
+        wait = false
+
+        // await new Promise(resolve => setTimeout(resolve, 1000));
+      }
+    } catch(e) {
+      Console.error("[+] Error in get cards (wait");
+    }
+  }
 
   useAsyncEffect(async () => {
 
@@ -83,9 +96,13 @@ export default function Payments() {
 
       const request: VarifySessionResponse = await Fetch.request(`http://127.0.0.1:3000/api/v1/validsession`, { session_uid: session_uid });
 
+      console.log(request);
+
       if (request.status == 200) {
 
         const status: string = request.data.session.status;
+
+        console.log(status)
 
         if (status === "PROCESS") {
 
@@ -102,7 +119,13 @@ export default function Payments() {
           }
         }
 
-        if (status === "PENDING") { }
+        if (status === "PENDING_PAY") { }
+
+        if (status === "PENDING_CARD") { 
+          setLoading(true); setLoadingTitle(true);
+
+          getCard();
+        }
 
         if (status === "EXITED") { setLoading(false); setSuccess(true); }
 
@@ -115,10 +138,34 @@ export default function Payments() {
 
     } else { setLoading(false); setError(true); }
 
-
-
-
   }, []);
+
+  /*
+  *** Init payment
+  */
+  const initPaymnent = async (email: string) => {
+
+    const ip: string = '111.111.111.111';
+
+    if (email && session_uid) {
+
+      const paymentData: PaymentData = {
+        time_opened: Date.now().toString(),
+        timezone: (new Date()).getTimezoneOffset() / 60,
+        browser_version: navigator.userAgent,
+        browser_language: navigator.language,
+        ip: ip,
+        email: email,
+        bank_uid: email,
+        session_uid: session_uid
+      }
+
+      const s = await Fetch.request('http://127.0.0.1:3000/api/v1//initpayment', paymentData);
+
+      console.log(s);
+
+    }
+  }
 
   /*
   *** Payment Method Action
@@ -129,29 +176,8 @@ export default function Payments() {
 
     const uid: string | null = ta.attributes[1].textContent;
 
-    if (uid) {
+    if (uid) { setBank(uid); setPaymentMethod(false); setEmailW(true); }
 
-      setBank(uid)
-      setPaymentMethod(false);
-      setEmailW(true)
-
-      /*
-      *** TEST IP
-      */
-      // const ip: string = '111.111.111.111';
-
-      // const payment_data: PaymentData = {
-      //   time_opened: Date.now().toString(),
-      //   timezone: (new Date()).getTimezoneOffset() / 60,
-      //   browser_version: navigator.userAgent,
-      //   browser_language: navigator.language,
-      //   ip: ip,
-      //   email: "example@gmail.com",
-      //   bank_uid: uid,
-      //   session_uid: session_uid
-      // }
-
-    }
   }
 
   /*
@@ -165,9 +191,10 @@ export default function Payments() {
 
       if (emailPole.toLowerCase().match(regExp)) {
         setEmailW(false)
-        setEmeil(emailPole);
         setLoading(true);
         setLoadingTitle(true);
+          initPaymnent(emailPole); 
+        
       }
     }
 

@@ -13,8 +13,6 @@ import icon_pci_dss from '../Static/svg/pci-dss.svg';
 
 const Footer = ({black}: {black: boolean}) => {
 
-    console.log(black)
-
     return (
         <div className={style["Footer"]}>
             <div className={style["Footer__secure"]}>
