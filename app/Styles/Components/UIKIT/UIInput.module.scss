@@ -1,0 +1,24 @@
+
+
+.UIInput {
+    width: 100%;
+    box-sizing: border-box;
+    margin: 20px 0px;
+    font-size: 17px;
+    padding: 15px;
+    border-radius: 10px;
+    border: 2px solid #042fb6;
+    outline: none;
+
+    &:focus {
+        border: 2px solid #042eb660;
+    }
+
+    &__error {
+        border: 2px solid #ff1702a1;
+    }
+
+    &__error:focus {
+        border: 2px solid #ff1702a1;
+    }
+}

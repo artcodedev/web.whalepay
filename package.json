@@ -10,11 +10,13 @@
   },
   "dependencies": {
     "elysia": "^1.1.25",
+    "elysia-ip": "^1.0.7",
     "next": "15.0.3",
     "react": "19.0.0-rc-66855b96-20241106",
     "react-dom": "19.0.0-rc-66855b96-20241106",
     "sass": "^1.81.0",
-    "use-async-effect": "^2.2.7"
+    "use-async-effect": "^2.2.7",
+    "zustand": "^5.0.1"
   },
   "devDependencies": {
     "@types/bun": "^1.1.14",

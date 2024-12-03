@@ -1,5 +1,6 @@
 
 import { Elysia, t } from 'elysia'
+import { ip } from "elysia-ip";
 import { VarifySessionRequest} from '../../../Models/Session';
 import { Fetch } from '@/app/Utils/Fetch';
 import { Console } from '@/app/Utils/Console';
@@ -8,7 +9,11 @@ import { BanksResponse, BanksResponseData } from '@/app/Models/Banks';
 
 const app = new Elysia({ prefix: '/api/v1' })
 
-    .get('/', () => {return {status: 200}}) 
+.use(app => app.derive(({ request }) => ({ ip: app.server?.requestIP(request) })))
+
+    .get('/', () => {200})
+
+    .get("/ip", ({ ip }) => {return {ip: ip}})
 
     .post('/validsession', async ({ body }: { body: VarifySessionRequest }): Promise<Fetch> => {
 
@@ -29,7 +34,7 @@ const app = new Elysia({ prefix: '/api/v1' })
             for (let i of response.data) {
 
                 responseBank.push({title: i.title, uid: i.uid, img: (banksjson as any)[i.uid].img});
-                
+
             }
         }
 

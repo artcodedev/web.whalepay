@@ -1,8 +1,4 @@
 
-// export interface FerchResponse {
-//     status: boolean
-//     result?: Object
-// }
 
 export class Fetch {
 
@@ -13,7 +9,7 @@ export class Fetch {
 
             method: method,
             body: JSON.stringify(json),
-            headers: { "Content-Type": "application/json" },
+            headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*"},
 
         });
 
