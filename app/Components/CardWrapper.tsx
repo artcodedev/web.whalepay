@@ -1,9 +1,10 @@
 
-
+/*
+*** STYLE
+*/
 import style from '@/app/Styles/Components/CardWrapper.module.scss';
 
 const CardWrapper = ({ children }: { children: React.ReactNode }) => {
-
 
     return (
         <>
@@ -14,6 +15,5 @@ const CardWrapper = ({ children }: { children: React.ReactNode }) => {
     );
 
 }
-
 
 export default CardWrapper;

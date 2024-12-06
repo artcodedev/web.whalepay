@@ -4,6 +4,8 @@
 *** STYLE
 */
 import style from '@/app/Styles/Components/MessageSuspense.module.scss';
+
+
 import svg from '@/app/Static/svg/time_pay.svg'
 
 const MessageSuspense = () => {

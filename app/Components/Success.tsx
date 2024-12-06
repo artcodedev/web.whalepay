@@ -16,7 +16,7 @@ const Success = () => {
 
                 <ExitedSuccess timeout={true} />
 
-                <UIButton title='Вернуться на сайт' />
+                <UIButton title='Вернуться на сайт' href="/"/>
 
             </PaymantWrapper>
 

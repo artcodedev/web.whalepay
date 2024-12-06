@@ -9,9 +9,6 @@ import style from '@/app/Styles/Components/PaymentMethod.module.scss';
 *** IMAGE(SVG)
 */
 import shevronDown from '@/app/Static/svg/chevron-down.svg';
-// import alfa from '@/app/Static/svg/logo/logo_alfa.svg';
-// import sber from '@/app/Static/svg/logo/logo_sberbank.svg';
-// import tinkoff from '@/app/Static/svg/logo/logo_tinkoff.svg';
 
 /*
 *** COMPONENTS
@@ -26,7 +23,7 @@ interface PropData {
 
 interface Prop {
 
-    data: PropData[]
+    data: PropData[] | []
     onclick: (e: React.MouseEvent<HTMLElement>) => void
 }
 

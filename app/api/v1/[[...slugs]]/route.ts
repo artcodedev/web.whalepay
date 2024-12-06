@@ -5,15 +5,15 @@ import { ip } from "elysia-ip";
 /*
 *** Models 
 */
-import { AnswersError, PaymentData, GetCard  } from '@/app/Models/Models';
+import { GetCard  } from '@/app/Models/Models';
 import { BanksResponse, BanksResponseData } from '@/app/Models/Banks';
 import { VarifySessionRequest} from '../../../Models/Session';
+import {PaymentData} from '@/app/Models/Payments';
 
 /*
 *** Utils
 */
 import { Fetch } from '@/app/Utils/Fetch';
-import { Console } from '@/app/Utils/Console';
 
 import banksjson from '@/app/Static/banks/banks.json';
 
@@ -79,10 +79,15 @@ const app = new Elysia({ prefix: '/api/v1' })
     */
     .post("/getcard", async ({body}: {body: GetCard }) => {
 
-        // Console.warning(body)
-        // return false
         return await Fetch.request(`${process.env.API_SERVER}/api/payment/getcard`,  body );
 
+    })
+
+    /*
+    *** Check status session
+    */
+    .post("/checkpay", async ({body} : {body: {session_uid: string}}): Promise<{status: string}> => {
+        return await Fetch.request(`${process.env.API_SERVER}/api/payment/checkpay`,  body );
     })
 
 export const GET = app.handle

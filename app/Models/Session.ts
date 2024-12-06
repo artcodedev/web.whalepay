@@ -16,7 +16,6 @@ interface VarifySessionResponsePaymentCardDetails {
 export interface VarifySessionResponsePayment {
     payment_type: string
     card_details?: VarifySessionResponsePaymentCardDetails
-    // payment_id?: number
     currency_symbol: string
     timeout: number
     amount: number

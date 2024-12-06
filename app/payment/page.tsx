@@ -29,30 +29,23 @@ import { Fetch } from '../Utils/Fetch';
 
 import { useStore } from '../Store/Store';
 
+
 /*
 *** Models
 */
-import { PaymentData } from '@/app/Models/Models';
-import { VarifySessionResponse, VarifySessionResponseData, VarifySessionResponsePayment, VarifySessionRequest } from '../Models/Session';
+
+import { VarifySessionResponse, VarifySessionResponsePayment } from '../Models/Session';
 import { BanksResponse, BanksResponseData } from '../Models/Banks';
+import { CardDetails, CardResponse, PaymentData, checkPayResponse } from '@/app/Models/Payments'
 
 
-interface CardDetails {
-  card_number?: string
-  card_reciever?: string
-  card_valid_thru?: string
-}
-
-interface CardResponse {
-  status: number
-  card_details: CardDetails
-  timeout: number
-  amount: number,
-  currency_symbol: string
-}
-
+/*
+*** Time sleep in miliseconds
+*/
+const sleep = async (ms: number): Promise<void> => { return new Promise((resolve) => setTimeout(resolve, ms)); }
 
 export default function Payments() {
+
 
   /*
   *** Store
@@ -103,13 +96,49 @@ export default function Payments() {
     setLoading(false);
     setPaymentSuspens(true);
     setHeaderAmount(true);
+
+    checkPay();
+  }
+
+  const checkPay = async () => {
+    try {
+
+      let wait: boolean = true;
+
+      while (wait) {
+
+
+        // if timer is done show exited
+        // if (timeout < time) setExited
+
+        let request: checkPayResponse = await Fetch.request('http://127.0.0.1:3000/api/v1/checkpay', { session_uid: session_uid });
+
+        console.log(request)
+
+        if (request.status) {
+
+          const status: string = request.status;
+
+          if (status === "EXITED") { setHeaderAmount(false); setPaymentSuspens(false); setLoading(false); setExited(true); wait = false; }
+
+          if (status === "SUCCESS") { setHeaderAmount(false); setPaymentSuspens(false); setLoading(false); setSuccess(true); wait = false; }
+
+          if (status === "ERROR") { setHeaderAmount(false); setPaymentSuspens(false); setLoading(false); setError(true); wait = false;}
+
+        }
+
+        
+        await sleep(1500);
+      }
+    } catch (e) {
+      Console.error("[+] Error in check pay wait");
+    }
   }
 
   /*
   *** Request on server wait card
   */
   const getCard = async () => {
-
 
     try {
 
@@ -123,13 +152,15 @@ export default function Payments() {
 
           const card_details: CardDetails = request.card_details;
 
-          if (card_details.card_number && card_details.card_reciever && card_details.card_valid_thru) {
+          if (card_details.card_number && card_details.card_receiver && card_details.card_valid_thru) {
 
             const card: string = card_details.card_number;
-            const reciever: string = card_details.card_reciever;
+            const reciever: string = card_details.card_receiver;
             const valid: string = card_details.card_valid_thru;
 
             setSuccessState(card, reciever, valid, request.currency_symbol, request.amount, request.timeout);
+
+            wait = false
 
           }
         }
@@ -139,13 +170,10 @@ export default function Payments() {
           setLoading(false)
           setError(true)
         }
-
-        wait = false
-
-        await new Promise(_ => setTimeout(1000));
+        await sleep(1500);
       }
     } catch (e) {
-      Console.error("[+] Error in get cards (wait");
+      Console.error("[+] Error in get cards wait");
     }
   }
 
@@ -155,13 +183,9 @@ export default function Payments() {
 
       const request: VarifySessionResponse = await Fetch.request(`http://127.0.0.1:3000/api/v1/validsession`, { session_uid: session_uid });
 
-      console.log(request);
-
       if (request.status == 200) {
 
         const status: string = request.data.session.status;
-
-        console.log(status)
 
         if (status === "PROCESS") {
 
@@ -207,11 +231,11 @@ export default function Payments() {
 
         if (status === "PENDING_CARD") { setLoading(true); setLoadingTitle(true); getCard(); }
 
-        if (status === "EXITED") { setLoading(false); setSuccess(true); }
+        if (status === "EXITED") { setHeaderAmount(false); setPaymentSuspens(false); setLoading(false); setExited(true);; }
 
-        if (status === "SUCCESS") { setLoading(false); }
+        if (status === "SUCCESS") { setHeaderAmount(false); setPaymentSuspens(false); setLoading(false); setSuccess(true); }
 
-        if (status === "ERROR") { setLoading(false); setError(true); }
+        if (status === "ERROR") { setHeaderAmount(false); setPaymentSuspens(false); setLoading(false); setError(true); }
 
       }
       else { setLoading(false); setError(true); }
@@ -240,9 +264,14 @@ export default function Payments() {
         session_uid: session_uid
       }
 
-      const s = await Fetch.request('http://127.0.0.1:3000/api/v1//initpayment', paymentData);
+      const response: {status: number} = await Fetch.request('http://127.0.0.1:3000/api/v1//initpayment', paymentData);
 
-      console.log(s);
+      if (response.status == 200) await getCard();
+
+      if (response.status != 200 && response.status != 444) {
+        setLoading(false);
+        setError(true);
+      }
 
     }
   }
@@ -263,7 +292,7 @@ export default function Payments() {
   /*
   *** Email check
   */
-  const checkEmail = () => {
+  const checkEmail = async () => {
 
     if (emailPole.length) {
 
@@ -300,7 +329,7 @@ export default function Payments() {
 
       {paymentSuspens ? <PaymentSuspens cardHolderName={cardReceiver} number={cardNumber} expiration={cardValidThru} /> : <></>}
 
-      {emailW ? <Email checkEmail={checkEmail} onFocus={onFocus} onKeyDown={onKeyDown} placeholder="Ваш Email" type="text" error={validEmail} onChange={onChange} /> : <></>}
+      {emailW ? <Email checkEmail={checkEmail} onFocus={onFocus} onKeyDown={onKeyDown} placeholder="Ваш E-mail" type="text" error={validEmail} onChange={onChange} /> : <></>}
 
       {exited ? <Exited /> : <></>}
 
@@ -310,7 +339,7 @@ export default function Payments() {
 
       {loading ? <ReceivingDetails message={loadingTitle ? 'Минуту! Ожидаю реквизиты.' : ''} /> : <></>}
 
-      {paymentMethod ? <PaymentMethod data={dataPaymentMethod} onclick={getBankUid} /> : <></>}
+      {paymentMethod ? <PaymentMethod data={dataPaymentMethod ? dataPaymentMethod : []} onclick={getBankUid} /> : <></>}
 
       <Footer black={true} />
 

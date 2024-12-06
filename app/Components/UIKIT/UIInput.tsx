@@ -1,6 +1,9 @@
 import { KeyboardEvent, ChangeEvent } from "react"
+
+/*
+*** STYLE
+*/
 import style from '@/app/Styles/Components/UIKIT/UIInput.module.scss';
-import { error } from "console";
 
 interface Props {
     onFocus: () => void
