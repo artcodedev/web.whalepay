@@ -1,5 +1,3 @@
-
-
 .MessageSuspense {
     background: #eee;
     margin-top: 15px;
@@ -9,6 +7,15 @@
     &__wrapp {
         display: flex;
         justify-content: center;
+
+        &__message {
+
+            & > img {
+                max-width: 24px;
+                vertical-align: middle;
+                margin-right: 3px;
+            }
+        }
     }
 
 }

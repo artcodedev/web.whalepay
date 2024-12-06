@@ -8,14 +8,20 @@ import Card from '@/app/Components/Card';
 import WarningSuspense from '@/app/Components/WarningSuspense';
 import MessageSuspense from '@/app/Components/MessageSuspense';
 
-const PaymentSuspens = () => {
+interface Props {
+    number: string
+    cardHolderName: string
+    expiration: string
+}
+
+const PaymentSuspens = ({...pr}: Props) => {
 
     return (
         <>
 
             <PaymantWrapper>
                 
-                <Card cardHolderName="use bane" number="0000000000000000" expiration="90/90" />
+                <Card cardHolderName={pr.cardHolderName} number={pr.number} expiration={pr.expiration} />
 
                 <MessageSuspense />
 

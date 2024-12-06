@@ -10,15 +10,19 @@ interface VarifySessionResponseSession {
 interface VarifySessionResponsePaymentCardDetails {
     card_reciever: string
     card_number: string
+    card_valid_thru: string
 }
 
-interface VarifySessionResponsePayment {
+export interface VarifySessionResponsePayment {
     payment_type: string
     card_details?: VarifySessionResponsePaymentCardDetails
-    payment_id?: number
+    // payment_id?: number
+    currency_symbol: string
+    timeout: number
+    amount: number
 }
 
-interface VarifySessionResponseData {
+export interface VarifySessionResponseData {
     session: VarifySessionResponseSession
     payment?: VarifySessionResponsePayment
     domain?: string

@@ -4,7 +4,7 @@
 */
 import style from '@/app/Styles/Components/Timer.module.scss';
 
-const Timer = () => {
+const Timer = ({timer}:{timer: number}) => {
     return (
         <>
 

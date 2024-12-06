@@ -2,7 +2,6 @@
 
 .Card {
 
-    // max-width: 400px;
     margin: auto;
 
     &__st2 {
@@ -27,11 +26,11 @@
     }
 
     &__expiration {
-        font-size: 45px;
+        font-size: 35px;
     } 
 
     &__cardholdername {
-        font-size: 40px;
+        font-size: 30px;
         text-transform: capitalize;
     }
 

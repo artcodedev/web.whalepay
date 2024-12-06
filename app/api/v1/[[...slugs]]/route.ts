@@ -44,11 +44,11 @@ const app = new Elysia({ prefix: '/api/v1' })
     /*
     *** Get all banks
     */
-    .post("/banks", async (): Promise<BanksResponse> => {
+    .post("/banks", async ({body} : {body: {session_uid: string}}): Promise<BanksResponse> => {
 
         console.log(process.env.API_SERVER);
 
-        const response: BanksResponse =  await Fetch.request(`${process.env.API_SERVER}/api/banks`);
+        const response: BanksResponse =  await Fetch.request(`${process.env.API_SERVER}/api/banks`, body);
 
         const responseBank: BanksResponseData[] = [];
 
