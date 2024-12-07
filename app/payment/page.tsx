@@ -148,6 +148,8 @@ export default function Payments() {
 
         let request: CardResponse = await Fetch.request('http://127.0.0.1:3000/api/v1/getcard', { session_uid: session_uid });
 
+        console.log(request)
+
         if (request.status == 200) {
 
           const card_details: CardDetails = request.card_details;
@@ -182,6 +184,8 @@ export default function Payments() {
     if (session_uid) {
 
       const request: VarifySessionResponse = await Fetch.request(`http://127.0.0.1:3000/api/v1/validsession`, { session_uid: session_uid });
+
+      console.log(request)
 
       if (request.status == 200) {
 
