@@ -69,7 +69,7 @@ export default function Payments() {
 
   const [cardDetails, setCardDetails] = useState<CardDetails>({});
   const [amount, setAmount] = useState<number | null>(null);
-  const [timeout, setTimeout] = useState<number>(0);
+  const [timeout, setTimeoutState] = useState<number>(0);
   const [headerAmount, setHeaderAmount] = useState<boolean>(false);
   const [amountSymbol, setAmountSymbol] = useState<string>('');
 
@@ -86,49 +86,54 @@ export default function Payments() {
 
   if (!session_uid) { redirect("/") }
 
-  const setSuccessState = (card_number: string, card_receiever: string, card_valid_thru: string, currency_symbol: string, amount: number, timeout: number) => {
+  const setSuccessState = async (card_number: string, card_receiever: string, card_valid_thru: string, currency_symbol: string, amount: number, timeout_at: number) => {
     setCardNumber(card_number);
     setCardReceiver(card_receiever);
     setCardValidThru(card_valid_thru);
     setAmount(amount);
-    setTimeout(timeout);
+
+    setTimeoutState(timeout_at);
+
     setAmountSymbol(currency_symbol);
     setLoading(false);
     setPaymentSuspens(true);
     setHeaderAmount(true);
 
-    checkPay();
+    await checkPay(timeout_at);
   }
 
-  const checkPay = async () => {
+  const checkPay = async (timeout: number) => {
     try {
 
       let wait: boolean = true;
 
       while (wait) {
 
+        const create_at: number = Date.parse(new Date().toLocaleString("en-US", { timeZone: "Europe/Moscow" }));
 
-        // if timer is done show exited
-        // if (timeout < time) setExited
+        if (create_at > timeout) {
 
-        let request: checkPayResponse = await Fetch.request('http://127.0.0.1:3000/api/v1/checkpay', { session_uid: session_uid });
+          setHeaderAmount(false); setPaymentSuspens(false); setLoading(false); setExited(true); wait = false;
 
-        console.log(request)
+        } else {
 
-        if (request.status) {
+          let request: checkPayResponse = await Fetch.request('http://127.0.0.1:3000/api/v1/checkpay', { session_uid: session_uid });
 
-          const status: string = request.status;
+          if (request.status) {
 
-          if (status === "EXITED") { setHeaderAmount(false); setPaymentSuspens(false); setLoading(false); setExited(true); wait = false; }
+            const status: string = request.status;
 
-          if (status === "SUCCESS") { setHeaderAmount(false); setPaymentSuspens(false); setLoading(false); setSuccess(true); wait = false; }
+            if (status === "EXITED") { setHeaderAmount(false); setPaymentSuspens(false); setLoading(false); setExited(true); wait = false; }
 
-          if (status === "ERROR") { setHeaderAmount(false); setPaymentSuspens(false); setLoading(false); setError(true); wait = false;}
+            if (status === "SUCCESS") { setHeaderAmount(false); setPaymentSuspens(false); setLoading(false); setSuccess(true); wait = false; }
 
+            if (status === "ERROR") { setHeaderAmount(false); setPaymentSuspens(false); setLoading(false); setError(true); wait = false; }
+
+          }
+
+          await sleep(1500);
         }
 
-        
-        await sleep(1500);
       }
     } catch (e) {
       Console.error("[+] Error in check pay wait");
@@ -185,8 +190,6 @@ export default function Payments() {
 
       const request: VarifySessionResponse = await Fetch.request(`http://127.0.0.1:3000/api/v1/validsession`, { session_uid: session_uid });
 
-      console.log(request)
-
       if (request.status == 200) {
 
         const status: string = request.data.session.status;
@@ -220,6 +223,8 @@ export default function Payments() {
                 const reciever: string = payment.card_details.card_reciever;
                 const valid: string = payment.card_details.card_valid_thru;
 
+                console.log( payment.timeout)
+
                 setSuccessState(card, reciever, valid, payment.currency_symbol, payment.amount, payment.timeout);
 
                 return
@@ -235,7 +240,7 @@ export default function Payments() {
 
         if (status === "PENDING_CARD") { setLoading(true); setLoadingTitle(true); getCard(); }
 
-        if (status === "EXITED") { setHeaderAmount(false); setPaymentSuspens(false); setLoading(false); setExited(true);; }
+        if (status === "EXITED") { setHeaderAmount(false); setPaymentSuspens(false); setLoading(false); setExited(true); }
 
         if (status === "SUCCESS") { setHeaderAmount(false); setPaymentSuspens(false); setLoading(false); setSuccess(true); }
 
@@ -268,7 +273,7 @@ export default function Payments() {
         session_uid: session_uid
       }
 
-      const response: {status: number} = await Fetch.request('http://127.0.0.1:3000/api/v1//initpayment', paymentData);
+      const response: { status: number } = await Fetch.request('http://127.0.0.1:3000/api/v1//initpayment', paymentData);
 
       if (response.status == 200) await getCard();
 
