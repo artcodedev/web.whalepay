@@ -10,7 +10,7 @@ import style from '@/app/Styles/Components/NotFoundErrors.module.scss';
 import error from '@/app/Static/svg/error.svg';
 import notfoundicon from '@/app/Static/svg/error.gif';
 
-const NotFoundErrors = ({notfound} : {notfound: boolean}) => {
+const NotFoundErrors = ({notfound} : {notfound: boolean}): JSX.Element => {
 
     return (
         <>

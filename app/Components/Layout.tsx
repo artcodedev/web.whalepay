@@ -4,7 +4,7 @@
 */
 import style from '@/app/Styles/Components/Layout.module.scss'
 
-const Layout = ({ children }: { children: React.ReactNode }) => {
+const Layout = ({ children }: { children: React.ReactNode }): JSX.Element => {
 
     return (
         <>

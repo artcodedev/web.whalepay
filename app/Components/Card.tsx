@@ -11,7 +11,7 @@ interface Props {
     expiration: string
 }
 
-const Card = ({...pr}: Props) => {
+const Card = ({...pr}: Props): JSX.Element => {
 
     const formatNumber = (num: string): string => {
         const regex = /^(\w{0,4})(\w{0,4})(\w{0,4})(\w{0,4})$/g

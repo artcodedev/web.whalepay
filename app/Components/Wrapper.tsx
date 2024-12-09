@@ -9,7 +9,7 @@ interface Props {
     children: React.ReactNode
 }
 
-const Wrraper = ({...pr}: Props) => {
+const Wrraper = ({...pr}: Props): JSX.Element => {
 
     return (
         <>

@@ -5,7 +5,7 @@
 */
 import style from '@/app/Styles/Components/Header.module.scss'
 
-const Header = ({color}: {color: boolean}) => {
+const Header = ({color}: {color: boolean}): JSX.Element => {
     return (
         <div className={style["Header"]}>
             <div className={style["Header__title"]}>

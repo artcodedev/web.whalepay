@@ -6,7 +6,7 @@ import PaymantWrapper from "@/app/Components/PaymentWrapper";
 import UIButton from '@/app/Components/UIKIT/UIButton';
 import  NotFoundErrors from '@/app/Components/NotFoundErrors'; 
 
-const NotFound = () => {
+const NotFound = (): JSX.Element => {
     return (
         <>
 

@@ -4,7 +4,7 @@
 */
 import style from '@/app/Styles/Components/PaymantWrapper.module.scss'
 
-const PaymantWrapper = ({ children }: { children: React.ReactNode }) => {
+const PaymantWrapper = ({ children }: { children: React.ReactNode }): JSX.Element => {
 
     return (
         <>

@@ -6,7 +6,7 @@ import UIButton from '@/app/Components/UIKIT/UIButton';
 import  NotFoundErrors from '@/app/Components/NotFoundErrors'; 
 
 
-const Errors = () => {
+const Errors = (): JSX.Element => {
     return (
         <>
 

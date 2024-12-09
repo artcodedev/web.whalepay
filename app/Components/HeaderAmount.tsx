@@ -15,7 +15,7 @@ interface Props {
     amount_symbol: string
 }
 
-const HeaderAmount = ({...pr}: Props) => {
+const HeaderAmount = ({...pr}: Props): JSX.Element => {
 
     return (
         <>

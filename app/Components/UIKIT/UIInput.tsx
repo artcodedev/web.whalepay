@@ -14,7 +14,7 @@ interface Props {
     error: boolean
 }
 
-const UIInput = ({ ...pr }: Props) => {
+const UIInput = ({ ...pr }: Props): JSX.Element => {
 
     return (
         <>

@@ -14,7 +14,7 @@ interface Props {
     expiration: string
 }
 
-const PaymentSuspens = ({...pr}: Props) => {
+const PaymentSuspens = ({...pr}: Props): JSX.Element => {
 
     return (
         <>

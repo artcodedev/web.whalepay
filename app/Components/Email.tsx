@@ -15,7 +15,7 @@ interface Props {
     checkEmail: () => void
 }
 
-const Email = ({...pr}: Props) => {
+const Email = ({...pr}: Props): JSX.Element => {
 
     return (
         <>

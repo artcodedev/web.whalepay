@@ -10,7 +10,7 @@ import style from '@/app/Styles/Components/Loading.module.scss';
 */
 import loading from '@/app/Static/svg/loading.svg';
 
-const Loading = ({ message }: { message?: string }) => {
+const Loading = ({ message }: { message?: string }): JSX.Element => {
 
     return (
         <>

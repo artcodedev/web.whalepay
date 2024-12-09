@@ -20,6 +20,8 @@ import Exited from '../Components/Exited';
 import ReceivingDetails from '@/app/Components/ReceivingDetails';
 import Errors from '@/app/Components/Errors';
 import Email from '@/app/Components/Email';
+import RequireVerifycation from '@/app/Components/RequireVerifycation';
+import ServiceNotWork from '@/app/Components/ServiceNotWork';
 
 import { Console } from '../Utils/Console';
 
@@ -44,7 +46,7 @@ import { CardDetails, CardResponse, PaymentData, checkPayResponse } from '@/app/
 */
 const sleep = async (ms: number): Promise<void> => { return new Promise((resolve) => setTimeout(resolve, ms)); }
 
-export default function Payments() {
+const Payments = (): JSX.Element => {
 
 
   /*
@@ -76,7 +78,8 @@ export default function Payments() {
   const [cardReceiver, setCardReceiver] = useState<string>('');
   const [cardValidThru, setCardValidThru] = useState<string>('');
   const [cardNumber, setCardNumber] = useState<string>('');
-
+  const [reqver, setReqVer] = useState<boolean>(false);
+  const [serviceNotWork, setServiceNotWork] = useState<boolean>(false);
   /*
   *** GET PARAMS QUERY
   */
@@ -113,11 +116,16 @@ export default function Payments() {
 
         if (create_at > timeout) {
 
+          console.log("111111")
+
           setHeaderAmount(false); setPaymentSuspens(false); setLoading(false); setExited(true); wait = false;
 
         } else {
 
           let request: checkPayResponse = await Fetch.request('http://127.0.0.1:3000/api/v1/checkpay', { session_uid: session_uid });
+
+
+          console.log(request);
 
           if (request.status) {
 
@@ -128,6 +136,8 @@ export default function Payments() {
             if (status === "SUCCESS") { setHeaderAmount(false); setPaymentSuspens(false); setLoading(false); setSuccess(true); wait = false; }
 
             if (status === "ERROR") { setHeaderAmount(false); setPaymentSuspens(false); setLoading(false); setError(true); wait = false; }
+
+            if (status === "REQVER") { setHeaderAmount(false); setPaymentSuspens(false); setLoading(false); setReqVer(true); wait = false; }
 
           }
 
@@ -189,6 +199,7 @@ export default function Payments() {
     if (session_uid) {
 
       const request: VarifySessionResponse = await Fetch.request(`http://127.0.0.1:3000/api/v1/validsession`, { session_uid: session_uid });
+      console.log(request)
 
       if (request.status == 200) {
 
@@ -199,11 +210,13 @@ export default function Payments() {
           // get banks fetch
           const fetch: BanksResponse = await Fetch.request(`http://127.0.0.1:3000/api/v1/banks`, { session_uid: session_uid });
 
+          console.log(fetch)
+
           if (fetch.status == 200) {
             if (fetch.data.length) {
               setDataPaymentMethod(fetch.data); setLoading(false); setPaymentMethod(true);
             } else {
-              setLoading(false); setError(true);
+              setLoading(false); setServiceNotWork(true);
             }
 
           }
@@ -245,6 +258,8 @@ export default function Payments() {
         if (status === "SUCCESS") { setHeaderAmount(false); setPaymentSuspens(false); setLoading(false); setSuccess(true); }
 
         if (status === "ERROR") { setHeaderAmount(false); setPaymentSuspens(false); setLoading(false); setError(true); }
+
+        if (status === "REQVER") { setLoading(false); setReqVer(true); }
 
       }
       else { setLoading(false); setError(true); }
@@ -334,6 +349,10 @@ export default function Payments() {
 
       <Header color={false} />
 
+      {serviceNotWork ? <ServiceNotWork /> : <></>}
+
+      {reqver ? <RequireVerifycation /> : <></>}
+
       {headerAmount ? <HeaderAmount amount={amount ? amount : 0} timeout={timeout} amount_symbol={amountSymbol} /> : <></>}
 
       {paymentSuspens ? <PaymentSuspens cardHolderName={cardReceiver} number={cardNumber} expiration={cardValidThru} /> : <></>}
@@ -344,7 +363,7 @@ export default function Payments() {
 
       {error ? <Errors /> : <></>}
 
-      {success ? <Success /> : <></>}
+      {success ? <Success amount={amount} /> : <></>}
 
       {loading ? <ReceivingDetails message={loadingTitle ? 'Минуту! Ожидаю реквизиты.' : ''} /> : <></>}
 
@@ -356,3 +375,5 @@ export default function Payments() {
 
   );
 }
+
+export default Payments;

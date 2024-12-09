@@ -5,7 +5,7 @@
 import style from '@/app/Styles/Components/Timer.module.scss';
 import { useEffect, useState } from 'react';
 
-const Timer = ({timer}:{timer: number}) => {
+const Timer = ({timer}:{timer: number}): JSX.Element => {
 
     const [minutes, setMinutes] = useState<number>(0);
     const [seconds, setSeconds] = useState<number>(0);

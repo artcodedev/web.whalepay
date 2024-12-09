@@ -13,11 +13,11 @@ export default function NotFoundPage() {
         <>
             <Layout>
 
-                <Header />
+                <Header color={false} />
 
                 <NotFound />
 
-                <Footer />
+                <Footer black={true} />
 
             </Layout>
         </>

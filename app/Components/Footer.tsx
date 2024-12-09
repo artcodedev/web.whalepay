@@ -11,7 +11,7 @@ import icon_visa from "../Static/svg/visa.svg";
 import icon_mastercard from "../Static/svg/mastercard.svg";
 import icon_pci_dss from '../Static/svg/pci-dss.svg';
 
-const Footer = ({black}: {black: boolean}) => {
+const Footer = ({black}: {black: boolean}): JSX.Element => {
 
     return (
         <div className={style["Footer"]}>

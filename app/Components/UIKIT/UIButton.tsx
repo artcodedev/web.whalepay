@@ -10,7 +10,7 @@ interface Props {
     href?: string
 }
 
-const UIButton = ({ ...pr }: Props) => {
+const UIButton = ({ ...pr }: Props): JSX.Element => {
     return (
         <>
 

@@ -27,7 +27,7 @@ interface Prop {
     onclick: (e: React.MouseEvent<HTMLElement>) => void
 }
 
-const PaymentMethod = ({...pr}: Prop) => {
+const PaymentMethod = ({...pr}: Prop): JSX.Element => {
 
     return (
         <>

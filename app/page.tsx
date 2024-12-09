@@ -23,7 +23,7 @@ import sberbank from '@/app/Static/svg/logo/logo_sberbank.svg';
 import tinkiff from '@/app/Static/svg/logo/logo_tinkoff.svg';
 import alfabank from '@/app/Static/svg/logo/logo_alfa.svg';
 
-export default function Home() {
+const Home = (): JSX.Element => {
 
   return (
 
@@ -64,7 +64,8 @@ export default function Home() {
 
     </>
 
-
-
   );
 }
+
+
+export default Home;

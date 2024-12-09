@@ -8,11 +8,7 @@ export const metadata: Metadata = {
   description: "Платежный сервис на каждый день",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+const RootLayout = ({ children}: Readonly<{ children: React.ReactNode;}>): JSX.Element => {
   return (
     <html lang="en">
       <body >
@@ -21,3 +17,5 @@ export default function RootLayout({
     </html>
   );
 }
+
+export default RootLayout;

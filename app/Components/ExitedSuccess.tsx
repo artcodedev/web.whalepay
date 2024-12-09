@@ -11,9 +11,7 @@ import style from '@/app/Styles/Components/ExitedSuccess.module.scss';
 import errTimeOut from '@/app/Static/svg/ierror.svg';
 import success from '@/app/Static/svg/doublecheck.svg';
 
-const ExitedSuccess = ({ timeout }: { timeout: boolean }) => {
-
-    let prise: string = '15 000';
+const ExitedSuccess = ({ timeout, amount}: { timeout: boolean, amount?: number | null }): JSX.Element => {
 
     return (
         <>
@@ -38,7 +36,7 @@ const ExitedSuccess = ({ timeout }: { timeout: boolean }) => {
                         <div className={style['ExitedSuccess__wrapp__message__txt']}>
                             {timeout ? 
                             <>
-                            <div>Счет на сумму {prise} рублей оплачен.</div><div>Спасибо за оплату.</div>
+                            <div>Счет {amount ? `на сумму ${new Intl.NumberFormat().format(amount)} рублей` : ''} оплачен.</div><div>Спасибо за оплату.</div>
                             </> : <div>Спасибо за использование <span>PAY</span>WHALE.</div>}
                         </div>
                     </div>

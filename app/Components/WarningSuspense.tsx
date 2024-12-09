@@ -9,7 +9,7 @@ import style from '@/app/Styles/Components/WarningSuspense.module.scss';
 */
 import warning from '@/app/Static/svg/warning.svg';
 
-const WarningSuspense = () => {
+const WarningSuspense = (): JSX.Element => {
 
     return (
         <>
