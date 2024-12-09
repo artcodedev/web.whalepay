@@ -199,7 +199,6 @@ const Payments = (): JSX.Element => {
     if (session_uid) {
 
       const request: VarifySessionResponse = await Fetch.request(`http://127.0.0.1:3000/api/v1/validsession`, { session_uid: session_uid });
-      console.log(request)
 
       if (request.status == 200) {
 
@@ -213,11 +212,10 @@ const Payments = (): JSX.Element => {
           console.log(fetch)
 
           if (fetch.status == 200) {
-            if (fetch.data.length) {
-              setDataPaymentMethod(fetch.data); setLoading(false); setPaymentMethod(true);
-            } else {
-              setLoading(false); setServiceNotWork(true);
-            }
+            setLoading(false);
+
+            if (fetch.data.length) { setDataPaymentMethod(fetch.data);  setPaymentMethod(true);
+            } else { setServiceNotWork(true); }
 
           }
         }
@@ -262,6 +260,7 @@ const Payments = (): JSX.Element => {
         if (status === "REQVER") { setLoading(false); setReqVer(true); }
 
       }
+
       else { setLoading(false); setError(true); }
 
     } else { setLoading(false); setError(true); }
@@ -377,3 +376,6 @@ const Payments = (): JSX.Element => {
 }
 
 export default Payments;
+
+
+
