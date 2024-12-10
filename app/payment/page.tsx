@@ -137,7 +137,7 @@ const Payments = (): JSX.Element => {
 
             if (status === "ERROR") { setHeaderAmount(false); setPaymentSuspens(false); setLoading(false); setError(true); wait = false; }
 
-            if (status === "REQVER") { setHeaderAmount(false); setPaymentSuspens(false); setLoading(false); setReqVer(true); wait = false; }
+            // if (status === "REQVER") { setHeaderAmount(false); setPaymentSuspens(false); setLoading(false); setReqVer(true); wait = false; }
 
           }
 
@@ -200,6 +200,8 @@ const Payments = (): JSX.Element => {
 
       const request: VarifySessionResponse = await Fetch.request(`http://127.0.0.1:3000/api/v1/validsession`, { session_uid: session_uid });
 
+      console.log(request)
+
       if (request.status == 200) {
 
         const status: string = request.data.session.status;
@@ -249,6 +251,8 @@ const Payments = (): JSX.Element => {
 
         }
 
+        if (status === "PENDING_TRX") {setLoading(true); setLoadingTitle(true); getCard();}
+
         if (status === "PENDING_CARD") { setLoading(true); setLoadingTitle(true); getCard(); }
 
         if (status === "EXITED") { setHeaderAmount(false); setPaymentSuspens(false); setLoading(false); setExited(true); }
@@ -257,7 +261,7 @@ const Payments = (): JSX.Element => {
 
         if (status === "ERROR") { setHeaderAmount(false); setPaymentSuspens(false); setLoading(false); setError(true); }
 
-        if (status === "REQVER") { setLoading(false); setReqVer(true); }
+        // if (status === "REQVER") { setLoading(false); setReqVer(true); }
 
       }
 
