@@ -116,8 +116,6 @@ const Payments = (): JSX.Element => {
 
         if (create_at > timeout) {
 
-          console.log("111111")
-
           setHeaderAmount(false); setPaymentSuspens(false); setLoading(false); setExited(true); wait = false;
 
         } else {
@@ -216,7 +214,8 @@ const Payments = (): JSX.Element => {
           if (fetch.status == 200) {
             setLoading(false);
 
-            if (fetch.data.length) { setDataPaymentMethod(fetch.data);  setPaymentMethod(true);
+            if (fetch.data.length) {
+              setDataPaymentMethod(fetch.data); setPaymentMethod(true);
             } else { setServiceNotWork(true); }
 
           }
@@ -236,7 +235,7 @@ const Payments = (): JSX.Element => {
                 const reciever: string = payment.card_details.card_reciever;
                 const valid: string = payment.card_details.card_valid_thru;
 
-                console.log( payment.timeout)
+                console.log(payment.timeout)
 
                 setSuccessState(card, reciever, valid, payment.currency_symbol, payment.amount, payment.timeout);
 
@@ -251,7 +250,7 @@ const Payments = (): JSX.Element => {
 
         }
 
-        if (status === "PENDING_TRX") {setLoading(true); setLoadingTitle(true); getCard();}
+        if (status === "PENDING_TRX") { setLoading(true); setLoadingTitle(true); getCard(); }
 
         if (status === "PENDING_CARD") { setLoading(true); setLoadingTitle(true); getCard(); }
 
@@ -261,7 +260,32 @@ const Payments = (): JSX.Element => {
 
         if (status === "ERROR") { setHeaderAmount(false); setPaymentSuspens(false); setLoading(false); setError(true); }
 
-        // if (status === "REQVER") { setLoading(false); setReqVer(true); }
+        if (status === "REQVER") {
+          if (request.data?.payment) {
+
+            const payment: VarifySessionResponsePayment = request.data.payment;
+
+            if (payment) {
+
+              if (payment.card_details) {
+
+                const card: string = payment.card_details.card_number;
+                const reciever: string = payment.card_details.card_reciever;
+                const valid: string = payment.card_details.card_valid_thru;
+
+                console.log(payment.timeout)
+
+                setSuccessState(card, reciever, valid, payment.currency_symbol, payment.amount, payment.timeout);
+
+                return
+              }
+
+            };
+
+            setLoading(false)
+            setError(true)
+          }
+        }
 
       }
 
