@@ -24,7 +24,6 @@ const Card = ({...pr}: Props): JSX.Element => {
 
     return (
         <>
-
             <div className={style['Card']}>
                 <svg version="1.1" fill="#ccc" id="cardfront" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 750 471" xmlSpace="preserve">
                     <g id="Front">

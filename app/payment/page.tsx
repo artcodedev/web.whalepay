@@ -120,7 +120,7 @@ const Payments = (): JSX.Element => {
 
         } else {
 
-          let request: checkPayResponse = await Fetch.request('http://127.0.0.1:3000/api/v1/checkpay', { session_uid: session_uid });
+          let request: checkPayResponse = await Fetch.request('http://localhost:3001/api/v1/checkpay', { session_uid: session_uid });
 
 
           console.log(request);
@@ -159,7 +159,7 @@ const Payments = (): JSX.Element => {
 
       while (wait) {
 
-        let request: CardResponse = await Fetch.request('http://127.0.0.1:3000/api/v1/getcard', { session_uid: session_uid });
+        let request: CardResponse = await Fetch.request('http://localhost:3001/api/v1/getcard', { session_uid: session_uid });
 
         console.log(request)
 
@@ -196,7 +196,7 @@ const Payments = (): JSX.Element => {
 
     if (session_uid) {
 
-      const request: VarifySessionResponse = await Fetch.request(`http://127.0.0.1:3000/api/v1/validsession`, { session_uid: session_uid });
+      const request: VarifySessionResponse = await Fetch.request(`http://localhost:3001/api/v1/validsession`, { session_uid: session_uid });
 
       console.log(request)
 
@@ -207,7 +207,7 @@ const Payments = (): JSX.Element => {
         if (status === "PROCESS") {
 
           // get banks fetch
-          const fetch: BanksResponse = await Fetch.request(`http://127.0.0.1:3000/api/v1/banks`, { session_uid: session_uid });
+          const fetch: BanksResponse = await Fetch.request(`http://localhost:3001/api/v1/banks`, { session_uid: session_uid });
 
           console.log(fetch)
 
