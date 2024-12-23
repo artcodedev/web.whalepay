@@ -48,16 +48,17 @@
     }
 }
 
-@media (max-width: 450px) {
+@media screen and (max-width: 450px) {
     .Header {
         clear: inherit;
+        margin-top: 55px;
 
         &__title {
             display: flex;
             flex-direction: column;
 
             &__logo {
-                font-size: 43px;
+                font-size: 49px;
                 font-weight: 5;
                 line-height: 30px;
 
@@ -68,6 +69,23 @@
             }
 
             &__text {
+                font-size: 28.2px;
+                font-weight: 3;
+            }
+
+            &__logo__black {
+                font-size: 49px;
+                font-weight: 5;
+                line-height: 30px;
+                color: #000;
+
+                span {
+                    color: $accent;
+                    font-weight: 4;
+                }
+            }
+
+            &__text__black {
                 font-size: 28.2px;
                 font-weight: 3;
             }
